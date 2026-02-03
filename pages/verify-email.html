@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatty - Verify Email</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/verify-email.css">
+</head>
+<body>
+    <div class="verify-container">
+        <div class="verify-card">
+            <!-- Illustration -->
+            <div class="verify-icon">
+                ✉️
+            </div>
+
+            <!-- Title & Description -->
+            <h1>Please Verify Account</h1>
+            <p class="verify-description">
+                Enter the six digit code we sent to your email address to verify your new Chatty account:
+            </p>
+
+            <!-- OTP Input Form -->
+            <form class="otp-form">
+                <div class="otp-inputs">
+                    <input type="text" class="otp-input" maxlength="1" placeholder="" required>
+                    <input type="text" class="otp-input" maxlength="1" placeholder="" required>
+                    <input type="text" class="otp-input" maxlength="1" placeholder="" required>
+                    <input type="text" class="otp-input" maxlength="1" placeholder="" required>
+                    <input type="text" class="otp-input" maxlength="1" placeholder="" required>
+                    <input type="text" class="otp-input" maxlength="1" placeholder="" required>
+                </div>
+
+                <button type="submit" class="verify-btn">Verify & Continue</button>
+            </form>
+
+            <!-- Resend Code Link -->
+            <div class="resend-section">
+                <p>Didn't receive the code? <a href="#" class="resend-link">Resend</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/verify-email.js"></script>
+</body>
+</html>

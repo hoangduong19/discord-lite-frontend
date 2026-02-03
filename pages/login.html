@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatty - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/login.css">
+    
+</head>
+<body>
+    <div class="login-wrapper">
+        <!-- Left Side - Login Form -->
+        <div class="login-left">
+            <div class="login-container">
+                <div class="logo">Chatty</div>
+                <h1>Log in</h1>
+                <p class="welcome-text">Welcome back! Please enter your details.</p>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username *</label>
+                        <input type="text" id="username" name="username" placeholder="hoshino12345" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••••••••••••" required>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot password</a>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Sign in</button>
+                </form>
+                
+                <script src="../js/api/auth-login.js"></script>
+                <div class="signup-link">
+                    Don't have an account? <a href="sign-up.html">Sign up</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Side - Welcome Section -->
+        <div class="login-right">
+            <div class="welcome-section">
+                <div class="welcome-icon">Chatty</div>
+                <h2>Welcome to Chatty</h2>
+                <p>Connect effortlessly with your team. Simplify communication, improve collaboration, and create an engaging experience for everyone.</p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
