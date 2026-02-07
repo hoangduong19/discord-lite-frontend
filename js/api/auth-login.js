@@ -26,19 +26,37 @@ form.addEventListener("submit", async (e) => {
 
     // nếu login fail
     if (!response.ok) {
-      const msg = await response.text();
-      alert("Login failed: " + msg);
-      return;
+      const err = await response.json();
+
+      switch (err.code) {
+        case "EMAIL_NOT_VERIFIED":
+          localStorage.setItem("pendingUsername", username);
+          localStorage.setItem("otpSentOnce", "false");
+          window.location.href = "verify-email.html";
+          return;
+
+        case "INVALID_USERNAME":
+        case "INVALID_PASSWORD":
+          alert("Sai tài khoản hoặc mật khẩu");
+          return;
+
+        case "USER_DISABLED":
+          alert("Tài khoản đã bị khóa");
+          return;
+
+        default:
+          alert("Có lỗi xảy ra, thử lại sau");
+          return;
+      }
     }
 
     // login success
     const data = await response.json();
-
     // lưu JWT
     localStorage.setItem("accessToken", data.token);
 
     // chuyển sang trang home
-    window.location.href = "../index.html";
+    window.location.href = "./index.html";
 
   } catch (error) {
     console.error(error);

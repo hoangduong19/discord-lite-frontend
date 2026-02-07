@@ -1,4 +1,56 @@
-// OTP Input Navigation
+const API_BASE = "http://localhost:8080";
+window.addEventListener("load", async () => {
+    const username = localStorage.getItem("pendingUsername");
+    const otpSentOnce = localStorage.getItem("otpSentOnce");
+
+    // Không có username → quay về login
+    if (!username) {
+        window.location.href = "./login.html";
+        return;
+    }
+
+    // Đã gửi auto rồi → KHÔNG gửi nữa
+    if (otpSentOnce === "true") return;
+
+    try {
+        await fetch(`${API_BASE}/auth/send-verification-email`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                username,
+                purpose: "EMAIL_VERIFY"
+            })
+        });
+
+        // Đánh dấu đã gửi 1 lần
+        localStorage.setItem("otpSentOnce", "true");
+        console.log("OTP auto sent");
+    } catch (err) {
+        console.error("Failed to auto send OTP", err);
+    }
+});
+document.querySelector(".resend-link").addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const username = localStorage.getItem("pendingUsername");
+    if (!username) return;
+
+    try {
+        await fetch(`${API_BASE}/auth/send-verification-email`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                username,
+                purpose: "EMAIL_VERIFY"
+            })
+        });
+
+        alert("OTP đã được gửi lại");
+    } catch (err) {
+        alert("Không thể gửi OTP");
+    }
+});
+
 document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
     input.addEventListener('input', (e) => {
         // Chỉ cho phép nhập số
@@ -47,18 +99,49 @@ document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
     
 });
 
-// Submit form
-document.querySelector('.otp-form').addEventListener('submit', (e) => {
+document.querySelector('.otp-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const code = Array.from(document.querySelectorAll('.otp-input'))
         .map(input => input.value)
         .join('');
 
-    if (code.length === 6) {
-        console.log('OTP Code:', code);
-        // Gửi code lên server
-        alert('Verifying: ' + code);
-    } else {
+    if (code.length !== 6) {
         alert('Please enter all 6 digits');
+        return;
+    }
+
+    const username  = localStorage.getItem("pendingUsername");
+    if (!username) {
+        window.location.href = "./login.html";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE}/auth/verify-email`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username,
+                code
+            })
+        });
+
+        if (!response.ok) {
+            alert("Invalid or expired code");
+            return;
+        }
+
+        alert("Xác thực thành công, vui lòng đăng nhập lại");
+
+        localStorage.removeItem("pendingUsername");
+        localStorage.removeItem("otpSentOnce");
+        window.location.href = "./login.html";
+
+    } catch (err) {
+        console.error(err);
+        alert("Cannot connect to server");
     }
 });

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatty - Discord Lite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <div class="left-container">
+            <div class="server-info">
+                <!-- Server/Logo Bar -->
+                <div class="server-sidebar">
+                    <div class="logo-section">
+                        <div class="app-logo">C</div>
+                    </div>
+                    <div class="server-icon">
+                        <div class="server-item">
+                            <img src="" alt="Server" class="server-img">
+                        </div>
+                        <div class="server-item add-server-btn" title="Add a Server">
+                            <span class="add-server-icon">+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Channels Sidebar -->
+                <div class="channel-sidebar">
+                    <div class="server-settings">
+                        <h3>Chatty</h3>
+                        <span class="settings-icon">⚙️</span>
+                    </div>
+                    <div class="channel-list">
+                        <div class="channel-item">
+                            <span class="channel-hash">#</span>
+                            <span>general</span>
+                        </div>
+                        <div class="channel-item">
+                            <span class="channel-hash">#</span>
+                            <span>announcements</span>
+                        </div>
+                        <div class="channel-item">
+                            <span class="channel-hash">#</span>
+                            <span>random</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Panel -->
+            <div class="user-panel">
+                <div class="user-info">
+                    <img src="" alt="Avatar" class="user-avatar">
+                    <div class="user-details">
+                        <div class="user-name">Username</div>
+                        <div class="user-status">Online</div>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button class="action-btn">🎤</button>
+                    <button class="action-btn">🔊</button>
+                    <button class="action-btn">⚙️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="right-container">
+            <div class="chat-window">
+                <!-- Channel Header -->
+                <div class="channel-header">
+                    <div class="header-left">
+                        <span class="header-hash">#</span>
+                        <h2>general</h2>
+                    </div>
+                    <div class="header-right">
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <button class="header-btn">📌</button>
+                        <button class="header-btn">👥</button>
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div class="message-area">
+                    <div class="message-group">
+                        <div class="message-item">
+                            <img src="" alt="Avatar" class="msg-avatar">
+                            <div class="msg-content">
+                                <div class="msg-header">
+                                    <span class="msg-author">User123</span>
+                                    <span class="msg-time">Today at 10:30 AM</span>
+                                </div>
+                                <div class="msg-text">Welcome to Chatty! 👋</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Input -->
+                <div class="message-input-area">
+                    <input type="text" class="message-input" placeholder="Type your message...">
+                    <button class="send-btn">📎</button>
+                </div>
+            </div>
+
+            <!-- Members Sidebar -->
+            <div class="member-sidebar">
+                <div class="member-header">
+                    <h3>Members</h3>
+                </div>
+                <div class="member-list">
+                    <div class="member-item">
+                        <div class="member-status online"></div>
+                        <span class="member-name">User123</span>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-status online"></div>
+                        <span class="member-name">User456</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

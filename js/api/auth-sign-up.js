@@ -1,5 +1,4 @@
 const API_BASE = "http://localhost:8080";
-
 // lấy form
 const form = document.getElementById("signUpForm");
 
@@ -35,14 +34,11 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    // register success
-    const data = await response.json();
+   localStorage.setItem("pendingUsername", username);
+   localStorage.setItem("otpSentOnce", "false");
 
-    // lưu JWT
-    localStorage.setItem("accessToken", data.token);
-
-    // chuyển sang trang home
-    window.location.href = "../index.html";
+  // chuyển sang trang verify email
+  window.location.href = "verify-email.html";
 
   } catch (error) {
     console.error(error);
