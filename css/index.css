@@ -88,6 +88,7 @@ body {
     flex-direction: column;
     gap: 0.625rem;
     padding: 0.625rem 0;
+    overflow: visible;
 }
 
 .server-item {
@@ -111,6 +112,34 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.server-item {
+    position: relative;
+}
+
+/* Tooltip server name */
+.server-item::after {
+    content: attr(data-name);
+    position: absolute;
+    left: calc(100% + 0.625rem);
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+.server-item:hover::after {
+    opacity: 1;
 }
 
 /* Add Server Button */
@@ -140,7 +169,7 @@ body {
 
 /* Tooltip */
 .add-server-btn::after {
-    content: attr(title);
+    content: attr(data-tooltip);
     position: absolute;
     left: calc(100% + 0.625rem);
     top: 50%;
