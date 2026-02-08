@@ -53,7 +53,7 @@ form.addEventListener("submit", async (e) => {
     // login success
     const data = await response.json();
     // lưu JWT
-    localStorage.setItem("accessToken", data.token);
+    sessionStorage.setItem("accessToken", data.token);
 
     // chuyển sang trang home
     window.location.href = "./index.html";

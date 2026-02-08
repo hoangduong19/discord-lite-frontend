@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-    <script type="module" src="../js/api/server.js"></script>
+    <script type="module" src="../js/index.js"></script>
     <div class="app-container">
         <!-- Left Sidebar -->
         <div class="left-container">
@@ -30,20 +30,16 @@
                 <div class="channel-sidebar">
                     <div class="server-settings">
                         <h3>Chatty</h3>
-                        <span class="settings-icon">⚙️</span>
+                        <div class="settings-actions">
+                            <button class="add-channel-btn" data-tooltip="Add Channel">
+                                <span class="add-channel-icon">+</span>
+                            </button>
+                            <span class="settings-icon">⚙️</span>
+                        </div>
                     </div>
                     <div class="channel-list">
                         <div class="channel-item">
                             <span class="channel-hash">#</span>
-                            <span>general</span>
-                        </div>
-                        <div class="channel-item">
-                            <span class="channel-hash">#</span>
-                            <span>announcements</span>
-                        </div>
-                        <div class="channel-item">
-                            <span class="channel-hash">#</span>
-                            <span>random</span>
                         </div>
                     </div>
                 </div>

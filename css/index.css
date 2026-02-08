@@ -225,6 +225,33 @@ body {
     opacity: 1;
 }
 
+.settings-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.add-channel-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-channel-icon {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.add-channel-btn:hover .add-channel-icon {
+    opacity: 1;
+}
+
 .channel-list {
     flex: 1;
     overflow-y: auto;
