@@ -6,6 +6,10 @@
     <title>Chatty - Discord Lite</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/index.css">
+     <!-- SockJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <!-- STOMP -->
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 </head>
 <body>
     <script type="module" src="../js/index.js"></script>
@@ -22,6 +26,9 @@
         
                         <div class="server-item add-server-btn" data-tooltip="Add a Server">
                             <span class="add-server-icon">+</span>
+                        </div>
+                        <div class="server-item join-server-btn" data-tooltip="Join a Server">
+                            <span class="join-server-icon">+</span>
                         </div>
                     </div>
                 </div>
@@ -69,7 +76,7 @@
                 <div class="channel-header">
                     <div class="header-left">
                         <span class="header-hash">#</span>
-                        <h2>general</h2>
+                        <h2 id="channel-header">general</h2>
                     </div>
                     <div class="header-right">
                         <input type="text" class="search-input" placeholder="Search...">

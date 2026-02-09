@@ -59,3 +59,28 @@ export async function getServers() {
     }
 }
 
+export async function joinServerByCode(inviteCode) { 
+  try {
+        const token = sessionStorage.getItem("accessToken");
+        const headers = {
+            "Content-Type": "application/json"
+        };
+
+        if (token) {
+            headers["Authorization"] = `Bearer ${token}`;
+        }
+        const response = await fetch (`${API_BASE}/servers/join`, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify({ inviteCode: inviteCode })
+        });
+        if (!response.ok) {
+            throw new Error("Không thể join server này do mã không hợp lệ");
+        }
+        return response.json();
+    }
+    catch (error) {
+        console.error("Lỗi khi join server:", error);
+        throw error;
+    }
+}

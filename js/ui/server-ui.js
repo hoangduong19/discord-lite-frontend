@@ -1,8 +1,10 @@
-import { createServer, getServers } from "../api/server.js";
+import { createServer, getServers, joinServerByCode } from "../api/server.js";
 import { loadAndRenderChannels } from "./channel-ui.js";
 export function initServerUI() {
   const addServerBtn = document.querySelector(".add-server-btn");
   addServerBtn?.addEventListener("click", handleAddServer);
+  const joinServerBtn = document.querySelector(".join-server-btn");
+  joinServerBtn?.addEventListener("click", handleJoinServer);
 }
 
 export async function loadAndRenderServers() {
@@ -31,6 +33,21 @@ async function handleAddServer() {
   }
 }
 
+async function handleJoinServer() {
+  const inviteCode = prompt("Nhập mã mời server:");
+  if (!inviteCode || inviteCode.trim() === "") {
+    return; // Người dùng bỏ qua
+  }
+
+  try {
+    const response = await joinServerByCode(inviteCode.trim());
+    console.log("Join server thành công:", response);
+    alert(`Đã join server "${response.serverName}" thành công!`);
+    await loadAndRenderServers();
+  } catch (error) {
+    alert("Lỗi: " + error.message);
+  }
+}
 
 async function renderServers(servers) {
     if (!Array.isArray(servers)) {
@@ -40,12 +57,12 @@ async function renderServers(servers) {
 
     const container = document.querySelector(".server-icon");
     const addBtn = container.querySelector(".add-server-btn");
+    const joinBtn = container.querySelector(".join-server-btn");
 
     // Xóa server cũ (giữ lại nút +)
-    container.querySelectorAll(".server-item:not(.add-server-btn)")
+    container.querySelectorAll(".server-item:not(.add-server-btn):not(.join-server-btn)")
         .forEach(el => el.remove());
-
-    servers.forEach(server => {
+    servers.forEach((server, index) => {
         const div = document.createElement("div");
         div.className = "server-item";
         div.dataset.name = server.serverName; // tooltip OK
@@ -56,6 +73,10 @@ async function renderServers(servers) {
             await loadAndRenderChannels();
         });
 
+        if (index === 0) {
+            // Tự động chọn server đầu tiên
+            div.click();
+        }
         container.insertBefore(div, addBtn);
     });
 }

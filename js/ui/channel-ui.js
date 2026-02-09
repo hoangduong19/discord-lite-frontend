@@ -1,4 +1,5 @@
 import { createChannelForServer, getChannelsForServer  } from "../api/channel.js";
+import { openChannel } from "../websocket/message-controller.js";  
 export function initChannelUI() {
     const addChannelBtn = document.querySelector(".add-channel-btn");
     addChannelBtn?.addEventListener("click", handleAddChannel);
@@ -33,7 +34,7 @@ function renderChannels(channels) {
 
     // Xóa channel cũ
     channelList.innerHTML = "";
-
+    const channelHeader = document.getElementById("channel-header");
 
     channels.forEach((channel, index) => {
         const div = document.createElement("div");
@@ -45,6 +46,7 @@ function renderChannels(channels) {
         `;
 
         div.addEventListener("click", () => {
+            channelHeader.innerText = channel.channelName;
             localStorage.setItem("currentChannelId", channel.channelId);
 
             // Highlight channel đang chọn
@@ -53,12 +55,15 @@ function renderChannels(channels) {
                 .forEach(el => el.classList.remove("active"));
 
             div.classList.add("active");
+            window.openChannel(channel.channelId);
         });
 
         // Auto active channel đầu tiên
         if (index === 0) {
             div.classList.add("active");
             localStorage.setItem("currentChannelId", channel.channelId);
+            channelHeader.innerText = channel.channelName;
+            window.openChannel(channel.channelId);
         }
 
         channelList.appendChild(div);
