@@ -10,7 +10,7 @@ export function renderMessages(messages) {
       <img class="msg-avatar" src="" />
       <div class="msg-content">
         <div class="msg-header">
-          <span class="msg-author">${m.username}</span>
+          <span class="msg-author">${m.displayName}</span>
           <span class="msg-time">${formatTime(m.createdAt)}</span>
         </div>
         <div class="msg-text">${escapeHtml(m.content)}</div>
