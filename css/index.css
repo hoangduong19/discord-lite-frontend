@@ -256,6 +256,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .server-settings h3 {
@@ -400,6 +401,10 @@ body {
     color: var(--text-secondary);
 }
 
+.user-actions-container {
+    position: relative;
+}
+
 .user-actions {
     display: flex;
     gap: 0.3125rem;
@@ -423,6 +428,108 @@ body {
     background: var(--primary-blue);
     color: var(--white);
     transform: scale(1.1);
+}
+
+.settings-menu {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background: var(--white);
+    border: 0.0625rem solid var(--border-color);
+    border-radius: 0.375rem;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+}
+
+.settings-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    text-align: left;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.menu-btn:hover {
+    background: var(--light-gray);
+    color: #E74C3C;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    text-align: left;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logout-btn:hover {
+    background: var(--light-gray);
+    color: #E74C3C;
+}
+
+.server-settings-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--white);
+    border: 0.0625rem solid var(--border-color);
+    border-radius: 0.375rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.server-settings-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.server-settings-menu .menu-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    text-align: left;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.server-settings-menu .menu-btn:hover {
+    background: var(--light-gray);
+    color: var(--primary-blue);
 }
 
 /* ===================== MAIN CHAT AREA ===================== */

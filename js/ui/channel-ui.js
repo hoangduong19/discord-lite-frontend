@@ -3,6 +3,7 @@ import { openChannel } from "../websocket/message-controller.js";
 export function initChannelUI() {
     const addChannelBtn = document.querySelector(".add-channel-btn");
     addChannelBtn?.addEventListener("click", handleAddChannel);
+    initServerSettings();
 }
 export async function loadAndRenderChannels() {
     const serverId = localStorage.getItem("currentServerId");
@@ -69,4 +70,61 @@ function renderChannels(channels) {
         channelList.appendChild(div);
     });
    
+}
+
+function initServerSettings() {
+    const settingsIcon = document.querySelector(".settings-icon");
+    if (!settingsIcon) return;
+
+    const serverSettings = document.querySelector(".server-settings");
+    if (!serverSettings) return;
+
+    // Create settings menu
+    const settingsMenu = document.createElement("div");
+    settingsMenu.className = "server-settings-menu";
+    settingsMenu.innerHTML = `
+        <button class="menu-btn change-server-avatar-btn">Đổi avatar server</button>
+    `;
+
+    serverSettings.appendChild(settingsMenu);
+
+    // Add event listener for settings icon
+    settingsIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
+        settingsMenu.classList.toggle("show");
+    });
+
+    // Change server avatar button
+    const changeAvatarBtn = settingsMenu.querySelector(".change-server-avatar-btn");
+    changeAvatarBtn.addEventListener("click", () => {
+        handleChangeServerAvatar();
+        settingsMenu.classList.remove("show");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!serverSettings.contains(e.target)) {
+            settingsMenu.classList.remove("show");
+        }
+    });
+}
+
+function handleChangeServerAvatar() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Display preview
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            // In a real app, you would upload this to the server
+            // For now, just show alert for confirmation
+            alert("Avatar server sẽ được cập nhật (cần kết nối với backend)");
+        };
+        reader.readAsDataURL(file);
+    });
+    input.click();
 }

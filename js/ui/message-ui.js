@@ -1,13 +1,13 @@
-export function renderMessages(messages) {
+import { getCurrentUserInformation,getUserAvatarUrl } from "../api/user.js";
+export async function renderMessages(messages) {
   const area = document.querySelector(".message-area");
   area.innerHTML = "";
-
   messages.forEach(m => {
     const item = document.createElement("div");
     item.className = "message-item";
 
     item.innerHTML = `
-      <img class="msg-avatar" src="" />
+      <img class="msg-avatar" src="${m.avatarUrl}" />
       <div class="msg-content">
         <div class="msg-header">
           <span class="msg-author">${m.displayName}</span>

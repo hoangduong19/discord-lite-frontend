@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     initChannelUI();
     initMessageController();
     initUserPanel();
+    
     try {
         await loadAndRenderServers();
     } catch {
