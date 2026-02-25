@@ -1,4 +1,4 @@
-import { createServer, getServers, joinServerByCode } from "../api/server.js";
+import { createServer, getServers, joinServerByCode, getServerAvatarUrl } from "../api/server.js";
 import { loadAndRenderChannels } from "./channel-ui.js";
 export function initServerUI() {
   const addServerBtn = document.querySelector(".add-server-btn");
@@ -62,11 +62,21 @@ async function renderServers(servers) {
     // Xóa server cũ (giữ lại nút +)
     container.querySelectorAll(".server-item:not(.add-server-btn):not(.join-server-btn)")
         .forEach(el => el.remove());
-    servers.forEach((server, index) => {
+    servers.forEach(async (server, index) => {
         const div = document.createElement("div");
         div.className = "server-item";
         div.dataset.name = server.serverName; // tooltip OK
-
+        div.dataset.id = server.id; 
+        const avatarLink = await getServerAvatarUrl(server.id);
+        if (avatarLink) {
+          const img = document.createElement("img");
+          img.src = avatarLink;
+          img.className = "server-img";
+          div.appendChild(img);
+        } else {
+            // fallback: first letter
+            div.textContent = server.serverName.charAt(0).toUpperCase();
+        }
         div.addEventListener("click", async () => {
             console.log("Click server:", server.id);
             localStorage.setItem("currentServerId", server.id);

@@ -20,7 +20,6 @@ export async function getCurrentUserInformation() {
 }
 
 export async function handleChangeUserAvatar(infoItem) {
-  return new Promise((resolve, reject) => {
 
     const input = document.createElement("input");
     input.type = "file";
@@ -65,12 +64,16 @@ export async function handleChangeUserAvatar(infoItem) {
 
         // Confirm to backend (save key in DB)
         const confirmResponse = await fetch(
-          `${API_BASE}/api/files/confirm-user-avatar?key=${encodeURIComponent(key)}`,
+          `${API_BASE}/api/files/confirm-user-avatar`,
           {
             method: "POST",
             headers: {
-              "Authorization": `Bearer ${token}`
-            }
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              key: key
+            })
           }
         );
 
@@ -96,17 +99,13 @@ export async function handleChangeUserAvatar(infoItem) {
         avatarImg.src = avatarUrl;
         msgAvatars.forEach(img => img.src = avatarUrl);
 
-        resolve();
-
       } catch (error) {
         console.error("Upload error:", error);
         alert("Upload failed");
-        reject(error);
       }
     });
 
     input.click();
-  });
 }
 
 export async function getUserAvatarUrl() {

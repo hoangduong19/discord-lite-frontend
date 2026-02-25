@@ -1,5 +1,6 @@
 import { createChannelForServer, getChannelsForServer  } from "../api/channel.js";
 import { openChannel } from "../websocket/message-controller.js";  
+import { handleChangeServerAvatar } from "../api/server.js";
 export function initChannelUI() {
     const addChannelBtn = document.querySelector(".add-channel-btn");
     addChannelBtn?.addEventListener("click", handleAddChannel);
@@ -107,24 +108,4 @@ function initServerSettings() {
             settingsMenu.classList.remove("show");
         }
     });
-}
-
-function handleChangeServerAvatar() {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/*";
-    input.addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        // Display preview
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            // In a real app, you would upload this to the server
-            // For now, just show alert for confirmation
-            alert("Avatar server sẽ được cập nhật (cần kết nối với backend)");
-        };
-        reader.readAsDataURL(file);
-    });
-    input.click();
 }
